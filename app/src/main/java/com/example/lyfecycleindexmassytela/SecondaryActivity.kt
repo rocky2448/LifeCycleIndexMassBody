@@ -45,6 +45,10 @@ class SecondaryActivity : AppCompatActivity() {
         val indexMassBody = (weight / ((height / 100) * (height / 100))).toInt()
         indexMassBodyTV.text = indexMassBody.toString()
         when(indexMassBody) {
+            in 1..17 -> {
+                imageBodyTypeIV.setImageResource(R.drawable.index_mass_body_green)
+                infoForWeightLossTV.setText(R.string.easy_mass_body)
+            }
             in 18..25 -> {
                 imageBodyTypeIV.setImageResource(R.drawable.index_mass_body_green)
                 infoForWeightLossTV.setText(R.string.normal_mass_body)
@@ -57,7 +61,11 @@ class SecondaryActivity : AppCompatActivity() {
                 imageBodyTypeIV.setImageResource(R.drawable.index_mass_body_red)
                 infoForWeightLossTV.setText(R.string.hard_mass_body)
             }
-            else -> Snackbar.make(infoForWeightLossTV, "Данные введены неверно", Snackbar.LENGTH_SHORT).show()
+            else -> {
+                Snackbar.make(infoForWeightLossTV, "Данные введены неверно", Snackbar.LENGTH_SHORT).show()
+                val intent = Intent(this, MainActivity::class.java)
+                finish()
+            }
         }
     }
 }
